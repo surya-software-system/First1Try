@@ -3,43 +3,45 @@ use std::io::Write;
 use std::io::{BufReader, BufRead};
 
 struct Person{
-    fname : String,
-    lname : String,
-    dob : String
+    first_name : String,
+    last_name : String,
+    date_of_birth : String
 }
 
-pub fn task_file(i:BufReader<File>,o:&mut File,mut yyyy:i32,mut mm:i32,dd:i32) {
-    for line in i.lines() {
-        let l = line.unwrap();
-        let words: Vec<&str> = l.split(",").collect();
-        let p = Person { 
-            fname:String::from(words[0]),
-            lname:String::from(words[1]),
-            dob: String::from(words[2])
+pub fn age_calculator(input:BufReader<File>,output:&mut File,mut yyyy:i32,mut mm:i32,dd:i32) {
+    for line in input.lines() {
+        let line = line.unwrap();
+        let words: Vec<&str> = line.split(",").collect();
+        let person = Person { 
+            first_name:String::from(words[0]),
+            last_name:String::from(words[1]),
+            date_of_birth: String::from(words[2])
            };
 
-        let bday: Vec<&str> = (p.dob).split("-").collect();
+        let birthday: Vec<&str> = (person.date_of_birth).split("-").collect();
 
-        let y: i32 = bday[0].parse().unwrap();
-        let m: i32 = bday[1].parse().unwrap();
-        let d: i32 = bday[2].parse().unwrap();
+        let year: i32 = birthday[0].parse().unwrap();
+        let month: i32 = birthday[1].parse().unwrap();
+        let day: i32 = birthday[2].parse().unwrap();
 
-        if d > dd {
+        if day > dd {
             mm = mm - 1 ;
         }
-        if m > mm {
+        if month > mm {
             yyyy = yyyy - 1 ;
         }
-        let age = (yyyy - y).to_string() ;
-        write_file(p.fname, p.lname, age,o);
+        let age = (yyyy - year).to_string() ;
+        write(person.first_name, person.last_name, age,output);
     }
 }
+//function for iterate each line of input file and calculate the age
 
-fn write_file(fname:String, lname:String, age:String,o:&mut std::fs::File){
-    o.write_all(lname.as_bytes()).expect("`lname` couldn't write into file");
-    o.write_all(",".as_bytes()).expect("`,` couldn't write into file");
-    o.write_all(fname.as_bytes()).expect("`fname` couldn't write into file");
-    o.write_all(",".as_bytes()).expect("`,` couldn't write into file");
-    o.write_all(age.as_bytes()).expect("`age` couldn't write into file");
-    o.write_all(b"\n");
+fn write(first_name:String, last_name:String, age:String,output:&mut std::fs::File){
+    output.write_all(last_name.as_bytes()).expect("`lname` couldn't write into file");
+    output.write_all(",".as_bytes()).expect("`,` couldn't write into file");
+    output.write_all(first_name.as_bytes()).expect("`fname` couldn't write into file");
+    output.write_all(",".as_bytes()).expect("`,` couldn't write into file");
+    output.write_all(age.as_bytes()).expect("`age` couldn't write into file");
+    output.write_all(b"\n");
 }
+//function for write the data into text file .
