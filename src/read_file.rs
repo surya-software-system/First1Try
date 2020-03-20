@@ -6,4 +6,4 @@ pub fn read(i:&str) -> BufReader<File>{
     let r = BufReader::new(input_file);
     return r;
 }
-//function for open input file and read the perticular file.
+//function for open input file and read the particular file.
