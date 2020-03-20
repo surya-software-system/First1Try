@@ -5,6 +5,8 @@ struct Today {
     mm : i32,
     dd : i32
 }
+
+//function for get current date in the form of yyyy-mm-dd 
 pub fn today() -> (i32,i32,i32) {
     let now: DateTime<Utc> = Utc::now();
     let today = Today {
@@ -15,3 +17,4 @@ pub fn today() -> (i32,i32,i32) {
     };
     return (today.yyyy, today.mm, today.dd);
 }
+
