@@ -8,6 +8,7 @@ struct Person{
     date_of_birth : String
 }
 
+//function for iterate each line of input file and calculate the age
 pub fn age_calculator(input:BufReader<File>,output:&mut File,mut yyyy:i32,mut mm:i32,dd:i32) {
     for line in input.lines() {
         let line = line.unwrap();
@@ -34,8 +35,8 @@ pub fn age_calculator(input:BufReader<File>,output:&mut File,mut yyyy:i32,mut mm
         write(person.first_name, person.last_name, age,output);
     }
 }
-//function for iterate each line of input file and calculate the age
 
+//function for write the data into text file .
 fn write(first_name:String, last_name:String, age:String,output:&mut std::fs::File){
     output.write_all(last_name.as_bytes()).expect("`lname` couldn't write into file");
     output.write_all(",".as_bytes()).expect("`,` couldn't write into file");
@@ -44,4 +45,4 @@ fn write(first_name:String, last_name:String, age:String,output:&mut std::fs::Fi
     output.write_all(age.as_bytes()).expect("`age` couldn't write into file");
     output.write_all(b"\n");
 }
-//function for write the data into text file .
+
