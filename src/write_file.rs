@@ -5,3 +5,4 @@ pub fn write (o:&str) -> File {
     return output_file;
 }
 //function for creating a new file and return the file
+
