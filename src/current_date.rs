@@ -1,5 +1,6 @@
 extern crate chrono;
 use chrono::{DateTime, Utc};
+
 struct Today {
     yyyy : i32,
     mm : i32,
