@@ -7,3 +7,4 @@ pub fn read(i:&str) -> BufReader<File>{
     return r;
 }
 //function for open input file and read the particular file.
+
