@@ -1,10 +1,17 @@
 extern crate chrono;
 use chrono::{DateTime, Utc};
-
+struct Today {
+    yyyy : i32,
+    mm : i32,
+    dd : i32
+}
 pub fn today() -> (i32,i32,i32) {
     let now: DateTime<Utc> = Utc::now();
-    let yyyy = now.format("%Y").to_string().parse::<i32>().expect("%Y format not found !");
-    let mm = now.format("%m").to_string().parse::<i32>().expect("%m format not found !");
-    let dd = now.format("%d").to_string().parse::<i32>().expect("%d format not found !");
-    return (yyyy,mm,dd);
+    let today = Today {
+        yyyy : now.format("%Y").to_string().parse::<i32>().expect("%Y format not found !"),
+        mm : now.format("%m").to_string().parse::<i32>().expect("%m format not found !"),
+        dd : now.format("%d").to_string().parse::<i32>().expect("%d format not found !")
+    
+    };
+    return (today.yyyy, today.mm, today.dd);
 }
